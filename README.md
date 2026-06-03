@@ -1,17 +1,18 @@
-# innovative_net_test
+Innovative Network - Flutter Assessment
+This project is a clean-architecture Flutter application developed for the hiring assessment at Innovative Network (Pvt) Ltd. It implements secure authentication, dashboard functionality, and dynamic data integration using GetX.
 
-A new Flutter project for Innovative Net Test.
+ Features Implemented
+Clean Architecture: Separated logic into Data, Domain, and Presentation layers.
+Authentication: Login flow with secure data handling.
+GetX State Management: Efficient state control for UI updates.
+API Integration:
+Dynamic Distributor retrieval.
+Route fetching based on selected distributors.
+Responsive UI: Developed using flutter_screenutil to match Figma design specifications.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+🛠 Tech Stack
+Framework: Flutter
+State Management: GetX
+Architecture: Clean Architecture (Entities, UseCases, Repositories)
+API Client: Dio
+Design: Figma-based implementation
