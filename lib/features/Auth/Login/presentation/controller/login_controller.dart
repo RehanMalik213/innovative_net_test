@@ -4,6 +4,8 @@ import 'package:innovative_net_test/app_routes/app_pages.dart';
 import 'package:innovative_net_test/core/enums/error_enums.dart';
 import 'package:innovative_net_test/core/extensions/toasts/toast.dart';
 import 'package:innovative_net_test/core/local_storage/app_preferences.dart';
+import 'package:innovative_net_test/core/local_storage/hive/hive_service.dart';
+import 'package:innovative_net_test/core/local_storage/hive/mappers/user_mapper.dart';
 import 'package:innovative_net_test/core/utils/loaders/app_loader.dart';
 import 'package:innovative_net_test/features/Auth/Login/domain/entities/login_entity.dart';
 import 'package:innovative_net_test/features/Auth/Login/domain/request_params/login_request_params.dart';
@@ -56,10 +58,13 @@ class LoginController extends GetxController {
       ),
     );
     AppLoader.hide();
-    result.fold((error) => error.message.showToast(), (data) {
+    result.fold((error) => error.message.showToast(), (data) async {
       currentUser.value = data;
       "Login Successful".showToast(type: ToastType.success);
       instance.saveBearerToken(data.userData.token);
+
+      final hiveUser = data.userData.toHive();
+      await HiveService().saveUser(hiveUser);
       Get.offAllNamed(AppRoutes.DASHBOARD);
     });
   }

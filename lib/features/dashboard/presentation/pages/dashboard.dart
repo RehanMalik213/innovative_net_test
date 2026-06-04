@@ -6,6 +6,7 @@ import 'package:innovative_net_test/core/constants/app_images.dart';
 import 'package:innovative_net_test/core/constants/app_strings.dart';
 import 'package:innovative_net_test/core/extensions/widget_ext/widget_extensions.dart';
 import 'package:innovative_net_test/core/local_storage/app_preferences.dart';
+import 'package:innovative_net_test/core/local_storage/hive/hive_service.dart';
 import 'package:innovative_net_test/core/themes/app_colors.dart';
 import 'package:innovative_net_test/core/widgets/app_image_view.dart';
 import 'package:innovative_net_test/core/widgets/text/app_text.dart';
@@ -59,10 +60,18 @@ class DashboardPage extends StatelessWidget {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.person),
+              title: AppText(text: "Profile"),
+              onTap: () {
+                Get.toNamed(AppRoutes.PROFILE);
+              },
+            ),
+            ListTile(
               leading: Icon(Icons.logout),
-              title: Text("Logout"),
+              title: AppText(text: "Logout"),
               onTap: () {
                 AppPreferences.instance.clearBearerToken();
+                HiveService().closeBoxes();
                 Get.offAllNamed(AppRoutes.LOGIN);
               },
             ),

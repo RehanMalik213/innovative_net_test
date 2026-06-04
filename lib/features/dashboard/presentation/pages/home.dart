@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:innovative_net_test/core/enums/error_enums.dart';
+import 'package:innovative_net_test/core/extensions/toasts/toast.dart';
+import 'package:innovative_net_test/core/extensions/widget_ext/widget_extensions.dart';
 import 'package:innovative_net_test/core/themes/app_colors.dart';
 import 'package:innovative_net_test/core/widgets/dropdown/app_dropdown.dart';
 import 'package:innovative_net_test/core/widgets/text/app_text.dart';
@@ -19,11 +22,13 @@ class Home extends GetView<DashboardController> {
       child: Column(
         crossAxisAlignment: .start,
         children: [
-          AppText(
-            text: "Good Morning, Ahmed",
-            fontSize: 24,
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary,
+          Obx(
+            () => AppText(
+              text: "Good Morning, ${controller.userData.value?.name}",
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: AppColors.primary,
+            ),
           ),
           Obx(
             () => AppText(
@@ -43,20 +48,24 @@ class Home extends GetView<DashboardController> {
             color: AppColors.headingColor,
           ),
           8.verticalSpace,
-          Obx(() {
-            if (controller.distributorNames.isEmpty) {
-              return const CircularProgressIndicator();
-            }
-            return CustomDropdown(
-              hint: "Select Distributor",
-              items: controller.distributorNames,
-              onChanged: (value) {
-                if (value != null) {
-                  controller.onDistributorSelected(value);
+          GetBuilder<DashboardController>(
+            id: "updateDistributerUI",
+            builder: (_) {
+              return CustomDropdown(
+                hint: "Select Distributor",
+                items: controller.distributorNames,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.onDistributorSelected(value);
+                  }
+                },
+              ).onViewClick(() {
+                if (controller.distributorNames.isEmpty) {
+                  controller.fetchDistributors();
                 }
-              },
-            );
-          }),
+              });
+            },
+          ),
           24.verticalSpace,
           AppText(
             text: "Select Route",
@@ -65,20 +74,25 @@ class Home extends GetView<DashboardController> {
             color: AppColors.headingColor,
           ),
           8.verticalSpace,
-          Obx(() {
-            if (controller.routeNames.isEmpty) {
-              return const CircularProgressIndicator();
-            }
-            return CustomDropdown(
-              hint: "Select Route",
-              items: controller.routeNames,
-              onChanged: (value) {
-                if (value != null) {
-                  controller.onRouteSelected(value);
+          GetBuilder<DashboardController>(
+            id: "updateRouteUI",
+            builder: (_) {
+              return CustomDropdown(
+                hint: "Select Route",
+                items: controller.routeNames,
+                onChanged: (value) {
+                  if (value != null) {
+                    controller.onRouteSelected(value);
+                  }
+                },
+              ).onViewClick(() {
+                if (controller.selectedDistributorId.value == null ||
+                    controller.selectedDistributorId.value! == 0) {
+                  "select distributor first".showToast(type: ToastType.warning);
                 }
-              },
-            );
-          }),
+              });
+            },
+          ),
           24.verticalSpace,
         ],
       ),
