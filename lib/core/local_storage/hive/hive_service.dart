@@ -51,9 +51,7 @@ class HiveService {
       (item) =>
           item.distributorId == data.distributorId &&
           item.routeId == data.routeId &&
-          item.checkin.year == data.checkin.year &&
-          item.checkin.month == data.checkin.month &&
-          item.checkin.day == data.checkin.day,
+          item.checkin.substring(0, 10) == data.checkin.substring(0, 10),
     );
 
     if (isDuplicate) {

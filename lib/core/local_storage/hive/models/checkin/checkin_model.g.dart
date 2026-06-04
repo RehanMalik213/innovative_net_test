@@ -18,8 +18,8 @@ class OfflineCheckInAdapter extends TypeAdapter<OfflineCheckIn> {
     };
     return OfflineCheckIn(
       uuid: fields[0] as String?,
-      checkin: fields[1] as DateTime,
-      userId: fields[2] as String,
+      checkin: fields[1] as String,
+      userId: fields[2] as int,
       latitude: fields[3] as String,
       longitude: fields[4] as String,
       distributorId: fields[5] as int,

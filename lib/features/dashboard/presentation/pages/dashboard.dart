@@ -53,8 +53,16 @@ class DashboardPage extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               decoration: BoxDecoration(color: AppColors.primary),
-              accountName: AppText(text: "Ahmed"),
-              accountEmail: AppText(text: "ahmed@example.com"),
+              accountName: AppText(
+                text: "${controller.userData.value?.name}",
+                color: AppColors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+              accountEmail: AppText(
+                text: "${controller.userData.value?.email}",
+                color: AppColors.white,
+              ),
               currentAccountPicture: CircleAvatar(
                 child: AppImageView(imagePath: AppImages.person),
               ),

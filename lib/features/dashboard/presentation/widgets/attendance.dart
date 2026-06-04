@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:innovative_net_test/core/constants/app_images.dart';
 import 'package:innovative_net_test/core/themes/app_colors.dart';
 import 'package:innovative_net_test/core/widgets/app_image_view.dart';
 import 'package:innovative_net_test/core/widgets/button/app_button.dart';
 import 'package:innovative_net_test/core/widgets/text/app_text.dart';
+import 'package:innovative_net_test/features/dashboard/presentation/controller/dashboard_controller.dart';
 
-class Attendance extends StatelessWidget {
+class Attendance extends GetView<DashboardController> {
   const Attendance({super.key});
 
   @override
@@ -63,10 +65,23 @@ class Attendance extends StatelessWidget {
           ),
           24.verticalSpace,
           Center(
-            child: AppButton(
-              title: "Check In Now",
-              onPress: () {},
-              textColor: AppColors.white,
+            child: Obx(
+              () => AppButton(
+                color: controller.isAlreadyCheckedIn.value
+                    ? Colors.red
+                    : AppColors.secondary,
+                title: controller.isAlreadyCheckedIn.value
+                    ? "Check Out Now"
+                    : "Check In Now",
+                onPress: () {
+                  if (controller.isAlreadyCheckedIn.value) {
+                    controller.checkout();
+                  } else {
+                    controller.checkin();
+                  }
+                },
+                textColor: AppColors.white,
+              ),
             ),
           ),
         ],

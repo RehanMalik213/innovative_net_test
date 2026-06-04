@@ -8,9 +8,9 @@ class OfflineCheckIn extends HiveObject {
   @HiveField(0)
   final String uuid;
   @HiveField(1)
-  final DateTime checkin;
+  final String checkin;
   @HiveField(2)
-  final String userId;
+  final int userId;
   @HiveField(3)
   final String latitude;
   @HiveField(4)

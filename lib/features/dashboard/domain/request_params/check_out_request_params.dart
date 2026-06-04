@@ -1,13 +1,13 @@
-class CheckInRequestParams {
-  final String checkin;
+class CheckOutRequestParams {
+  final String checkout;
   final int userId;
   final String latitude;
   final String longitude;
   final int distributorId;
   final int routeId;
 
-  CheckInRequestParams({
-    required this.checkin,
+  CheckOutRequestParams({
+    required this.checkout,
     required this.userId,
     required this.latitude,
     required this.longitude,
@@ -16,7 +16,8 @@ class CheckInRequestParams {
   });
 
   Map<String, dynamic> toJson() => {
-    'in': checkin,
+    "id": 97488,
+    'out': checkout,
     'user_id': userId,
     'latitude': latitude,
     'longitude': longitude,
